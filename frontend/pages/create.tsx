@@ -1,12 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import AuctionComponent from '../components/Auction'
+import CreateComponent from '../components/Create'
 import NavigationComponent from '../components/Navigation'
-import artwork from '../public/noun.svg'
 
-const Home: NextPage = () => {
-  const currentArtwork: string = artwork
-
+const Create: NextPage = () => {
   return (
     <div className="flex justify-center bg-gray-200">
       <Head>
@@ -20,10 +17,10 @@ const Home: NextPage = () => {
 
       <main className="flex flex-col container py-8">
         <NavigationComponent />
-        <AuctionComponent artwork={currentArtwork} />
+        <CreateComponent />
       </main>
     </div>
   )
 }
 
-export default Home
+export default Create

@@ -12,11 +12,12 @@ const CanvasComponent = () => {
   const canvasRef = useRef<HTMLDivElement>(null)
 
   // INTERACTIONS
-  const [isDrawActive, setDrawActive] = useState(false)
+  const [isInPaintMode, setInPaintMode] = useState(false)
   const [paintColor, setPaintColor] = useState(defaultPaintColor)
+  const [canvasPixels, setCanvasPixels] = useState<JSX.Element[]>([])
 
   const draw = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (isDrawActive) {
+    if (isInPaintMode) {
       e.currentTarget.style.backgroundColor = paintColor
     }
   }
@@ -32,13 +33,13 @@ const CanvasComponent = () => {
     <div
       className={`flex flex-col w-[${canvasSize}]`}
       onMouseDown={() => {
-        setDrawActive(true)
+        setInPaintMode(true)
       }}
       onMouseUp={() => {
-        setDrawActive(false)
+        setInPaintMode(false)
       }}
       onMouseLeave={() => {
-        setDrawActive(false)
+        setInPaintMode(false)
       }}
     >
       <div className="flex flex-row justify-center gap-4 p-4 border border-gray-300 rounded-2xl">

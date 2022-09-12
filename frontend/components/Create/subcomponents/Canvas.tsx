@@ -14,7 +14,6 @@ const CanvasComponent = () => {
   // INTERACTIONS
   const [isInPaintMode, setInPaintMode] = useState(false)
   const [paintColor, setPaintColor] = useState(defaultPaintColor)
-  const [canvasPixels, setCanvasPixels] = useState<JSX.Element[]>([])
 
   const draw = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (isInPaintMode) {
@@ -22,17 +21,14 @@ const CanvasComponent = () => {
     }
   }
 
-  const reset = () => {
-    if (canvasRef.current) {
-      // Do something
-    }
-  }
+  const reset = () => {}
 
   // RETURN
   return (
     <div
-      className={`flex flex-col w-[${canvasSize}]`}
+      className={`flex flex-col`}
       onMouseDown={() => {
+        console.log(`On mouse down`)
         setInPaintMode(true)
       }}
       onMouseUp={() => {
@@ -41,6 +37,7 @@ const CanvasComponent = () => {
       onMouseLeave={() => {
         setInPaintMode(false)
       }}
+      style={{ width: `${canvasSize}` }}
     >
       <div className="flex flex-row justify-center gap-4 p-4 border border-gray-300 rounded-2xl">
         <button
@@ -69,8 +66,14 @@ const CanvasComponent = () => {
         </select>
       </div>
       <div
-        className={`grid grid-cols-${gridLength} grid-rows-${gridLength} gap-0.5 p-1 h-[${canvasSize}]`}
+        className={`gap-0.5 p-1`}
         ref={canvasRef}
+        style={{
+          display: 'grid',
+          gridTemplateRows: `repeat(${gridLength}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${gridLength}, minmax(0, 1fr))`,
+          height: `${canvasSize}`,
+        }}
       >
         {(() => {
           let divs = []
